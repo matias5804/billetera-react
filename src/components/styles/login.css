@@ -1,0 +1,19 @@
+.row img{
+    width: auto !important;
+    margin: 0 auto;
+}
+
+.btn a {
+    text-decoration: none;
+    color: black;
+    padding-left: 2px;
+}
+
+.iconWhats{
+    color:#28a745;
+    margin: 0 3px 3px 0;
+}
+
+.whats{
+    margin: 0 auto;
+}

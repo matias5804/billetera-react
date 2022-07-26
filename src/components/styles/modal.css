@@ -1,0 +1,32 @@
+.modall{
+    position: fixed;
+    z-index: 999999;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 100vh;
+    background-color: rgba(0,0,0,0.50);
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.modall.is-open{
+    display: flex;
+}
+
+.modall-container{
+    position: relative;
+    min-width: 320px;
+    max-width: 480px;
+    background-color: #fff;
+    min-height: 200px;
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.modall-close{
+    position: absolute;
+    top: 1rem; 
+    right: 1rem;
+}
