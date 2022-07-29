@@ -4,6 +4,8 @@ import { useState } from 'react';
 import logoPasion from "../assets/img/pasion.png"
 //import "../components/styles/credifacil.css"
 import WhatsApp from "../components/WhatsApp"
+import '../components/styles/login.css'
+
 //import axios from axios;
 
 

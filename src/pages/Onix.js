@@ -1,27 +1,65 @@
 import React from 'react'
+import logoOnix from "../assets/img/onix.png"
 import { useState } from 'react';
-//import axios from axios;
+import '../components/styles/login.css'
+import axios from 'axios';
+import AlertaLogin from '../components/AlertaLogin'
+
+const baseUrl="http://localhost:3050/usuarios"
 
 const Onix = () => {
 
-    const [body,setBody] = useState({documento:''})
+    const [documento, setDocumento] = useState({dni:''});
+    const [sinCuota, setSinCuota] = useState(false)
     
     const inputChange =({target}) => {
         const {name, value} = target
-        setBody({
-            ...body,
+
+        setDocumento({
             [name]:value
         })
+        console.log(documento);
+
+        setSinCuota(false)
     }
 
-    const onSubmit = () => {
-        window.location.href = "./consulta"
+    const onSubmit = async(e) => {
+
+        e.preventDefault();
+
+        await axios.get(baseUrl, 
+           {params:{dni: documento.dni}}
+        )
+
+        .then(response=>{   
+            return response.data
+        })
+
+        .then(response => {
+
+            console.log(response);
+
+            if ( (response.length > 0) && (response[0].financiera === "onix") ) {
+
+                alert(`¡Bienvenido ${response[0].nombre} ${response[0].apellido}!`)
+                window.location.href = "./consulta"
+
+            }else{
+                setSinCuota(true)
+            }
+
+        }).catch(error=>{
+            console.log(error);
+        })
     }
 
     return (
         <>
-            <div className="row" style={{height:"100px"}}></div> 
-
+            <div className="row" style={{height: "10px"}}></div>
+            <div className="row"style={{height:"100px"}}> 
+                <img src={logoOnix} alt='logo' />   
+            </div>
+            <div className="row" style={{height:"120px"}}></div> 
             <div className="row" style={{height:"60px"}}>  
                 <div className="col-md-4"></div>
                 <div className="col-md-4">
@@ -37,19 +75,13 @@ const Onix = () => {
                         <form action="/consulta" method="GET">
                             <div className="form-group" style={{marginBottom:"1rem"}}>
                                 <input 
-                                    type="text" 
+                                    type="num" 
                                     className="form-control" 
-                                    name="documento" 
+                                    name="dni" 
                                     placeholder="Ingresa aquí tu documento"
                                     onChange={inputChange}
-                                />
-
-                                <input                                 
-                                    type="hidden" 
-                                    className="form-control" 
-                                    name="financiera" 
-                                    value="ONIX"
-                                />  
+                                    params={sinCuota}
+                                /> 
                             </div>
 
                             <button 
@@ -71,6 +103,8 @@ const Onix = () => {
             <div className="row">
                 <div className="col-md-2"></div>
 
+                {sinCuota && <AlertaLogin/>}
+
 
 
                 <div className="col-md-2"></div>  
@@ -79,4 +113,5 @@ const Onix = () => {
         </>
     )
 }
+
 export default Onix

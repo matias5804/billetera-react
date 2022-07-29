@@ -1,6 +1,6 @@
 import imgCall from "../assets/img/call.png"
 import imgTuana from "../assets/img/tuana.png"
-import FormLogin2 from '../components/FormLogin2'
+import FormLogin from '../components/FormLogin'
 
 const TuanaHome = () => {
 
@@ -23,7 +23,7 @@ const TuanaHome = () => {
                                     <div className="row" style={{height: "60px"}}>
                                         <p className="login-card-description text-center font-weight-bold lead" style={{color:"#b0b3b5"}}>SISTEMA DE GESTION DE PAGOS </p> 
                                         
-                                        <FormLogin2/>
+                                        <FormLogin/>
                                     </div>
                                 </div>
                             </div>
